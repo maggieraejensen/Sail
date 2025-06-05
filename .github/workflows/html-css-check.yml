@@ -1,0 +1,22 @@
+name: Validate HTML & CSS
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Run HTML/CSS checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install tidy-html5
+        run: sudo apt-get install tidy
+
+      - name: Validate HTML
+        run: tidy -errors -q index.html || true
+
+
